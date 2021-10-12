@@ -1,0 +1,41 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.loader {
+  color: green;
+  font-family: Consolas, Menlo, Monaco, monospace;
+  font-weight: bolder;
+  font-size: 5vh;
+  opacity: 0.8;
+}
+.loader span {
+  display: inline-block;
+  -webkit-animation: pulse 0.3s alternate infinite ease-in;
+          animation: pulse 0.3s alternate infinite ease-in;
+}
+.loader span:nth-child(odd) {
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+@-webkit-keyframes pulse {
+  to {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+}
+@keyframes pulse {
+  to {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+}
