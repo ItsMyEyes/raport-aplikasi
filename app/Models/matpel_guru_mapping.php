@@ -20,7 +20,7 @@ class matpel_guru_mapping extends Model
 
     public function guru()
     {
-        return $this->hasOne('\App\Models\guru','kode_guru','id_guru');
+        return $this->hasOne('\App\Models\User','kode_login','id_guru');
     }
 
     public function matpel()

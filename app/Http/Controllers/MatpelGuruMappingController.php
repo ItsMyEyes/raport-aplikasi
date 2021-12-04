@@ -89,6 +89,7 @@ class MatpelGuruMappingController extends Controller
     public function show($matpel_guru_mapping)
     {
         $result = matpel_guru_mapping::where('id_matpel',$matpel_guru_mapping)->where('ta',request()->ta)->with(['guru','matpel'])->first();
+        $result['guru']['kode_guru'] = isset($result->guru) && !is_null($result->guru) ? $result->guru->kode_login : 0;
         return response()->json([
             'message'=>'berhasil mendapatkan data master pelajaran',
             'code' => 200,
