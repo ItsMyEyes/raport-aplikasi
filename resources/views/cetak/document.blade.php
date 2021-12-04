@@ -12,7 +12,7 @@
         <td width="30%" valign="top">{{$a->nama}}</td>
         <td width="16%" valign="top">Bidang Keahlian</td>
         <td width="2%" valign="top">:</td>
-        <td width="29%" valign="top">Multime</td>
+        <td width="29%" valign="top">Multimedia</td>
         </tr>
         <tr>
         <td width="20%" valign="top">Nomor Induk/NISN </td>
@@ -234,7 +234,7 @@
             <td width="146" height="19">Sakit</td>
             <td width="20" height="19">:</td>
             <td width="184" height="19" style="border-right-style: solid; border-right-width: 1">
-            <b></b>{{$cas->sakit}} hari</td>
+            <b></b>{{isset($cas) && !is_null($cas) ? $cas->sakit : 0}} hari</td>
           </tr>
           <tr>
             <td width="29" align="center" valign="top" height="19" style="border-left-style: solid; border-left-width: 1; border-right-style: solid; border-right-width: 1">
@@ -242,7 +242,7 @@
             <td width="146" height="19">Izin</td>
             <td width="20" height="19">:</td>
             <td width="184" height="19" style="border-right-style: solid; border-right-width: 1">
-            <b></b>{{$cas->ijin}} hari</td>
+            <b></b>{{isset($cas) && !is_null($cas) ? $cas->ijin : 0}} hari</td>
           </tr>
           <tr>
             <td width="29" align="center" valign="top" height="19" style="border-left-style: solid; border-left-width: 1; border-right-style: solid; border-right-width: 1; border-bottom-style: solid; border-bottom-width: 1">
@@ -252,13 +252,13 @@
             <td width="20" height="19" style="border-bottom-style: solid; border-bottom-width: 1">
             :</td>
             <td width="184" height="19" style="border-right-style: solid; border-right-width: 1; border-bottom-style: solid; border-bottom-width: 1">
-            <b></b>{{$cas->alpa}} hari</td>
+            <b></b>{{isset($cas) && !is_null($cas) ? $cas->alpa : 0}} hari</td>
           </tr>
         </tbody></table><br><br>
     <div class="strong">CATATAN WALI KELAS (untuk perhatian Orang Tua/Wali)</div>
     <table width="100%" style="border: 1px solid #000 !important;background-color: #ccc;">
       <tr>
-        <td style="padding:10px 10px 60px 10px;">{{$cas->catatan}}</td>
+        <td style="padding:10px 10px 60px 10px;">{{ isset($cas) && !is_null($cas) ? $cas->catatan : "-"}}</td>
       </tr>
     </table>
     <br>
@@ -272,8 +272,9 @@
         Jakarta,  {{date('d F Y',strtotime("now"))}}<br>
         Wali Kelas,<p>&nbsp;</p> 
         <br><br><br><br><br><br><br>
-        <p><u>Nama Wali kelas</u><br>
-        NIP.123</p></td>
+        <p><u>{{ $wali_kelas }}</u><br>
+        NIP. -
+      </p></td>
       </tr>
       <tr>
         <td width="100%" colspan="2"><center>

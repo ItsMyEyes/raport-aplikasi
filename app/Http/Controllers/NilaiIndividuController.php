@@ -99,7 +99,13 @@ class NilaiIndividuController extends Controller
         $data['r'] = $r;
         $data['cas'] = $cas;
         $data['prakerin'] = $prakerin;
+        $data['semester'] = request()->semester;
+        $data['ta'] = request()->ta;
+        $data['nama'] = $a->nama;
+        $data['nis'] = $a->nisn;
         $nis = request()->nis;
+        $wali_kelas = \App\Models\MappingSiswaKelas::where('id_siswa',$a->nis)->first();
+        $data['wali_kelas'] = $wali_kelas->kelas->guru->nama;
         $ta = str_replace('/','-',request()->ta);
         $data['tahun_pelajaran'] = $tahun_pelajaran;
         $pdf = \PDF::loadView('cetak.blank');
@@ -122,14 +128,16 @@ class NilaiIndividuController extends Controller
     {
         $a = \App\Models\NilaiIndividu::where('matpel',request()->matpel)->where('semester',request()->semester)->where('ta',request()->ta)->get();
         $c = \App\Models\MappingSiswaKelas::where('id_kelas',request()->id_kelas)->where('ta',request()->ta)->get();
-        $data['a'] = $a;
-        $data['c'] = $c; 
-        if ($a->count() > 0) {
+        if (empty($a)) {
             return response()->json([
-                'message' => 'gagal generate pdf',
+                'message' => 'Matpel tidak ditemukan pada semester ini',
                 'code' => 400,
             ],400);
         }
+        $data['a'] = $a;
+        $data['c'] = $c; 
+        $data['pelajaran'] = $a[0]->matpels->matpel->nama;
+        $data['kelas'] = $a[0]->siswa->kelas->kelas->kelas->kelas;
         $ta = request()->ta;
         $matpel = request()->matpel;
         $pdf = \PDF::loadView('cetak.blank');
@@ -171,11 +179,26 @@ class NilaiIndividuController extends Controller
                 'kode_login' => $page->siswa->nis,
                 'nama' => $page->siswa->nama,
                 'total' => $semua,
-                'rata' => $rata,
+                'rata' => ceil($rata),
             ];
         }
+        $columns = array_column($data, 'total');
+        array_multisort($columns, SORT_DESC, $data);
+        $fix = Array();
+        $i = 1;
+        foreach ($data as $key => $z) {
+            $fix[] =  [
+                'kode_login' => $z['kode_login'],
+                'nama' => $z['nama'],
+                'total' => $z['total'],
+                'rata' => $z['rata'],
+                'rangking' => $i++
+            ];
+        }
+        $columnz = array_column($fix, 'nama');
+        array_multisort($columnz, SORT_ASC, $fix);
         $pdf = \PDF::loadView('cetak.blank');
-        $rapor_nilai = view('cetak.rangking',compact('data','kelas','ta'));
+        $rapor_nilai = view('cetak.rangking',compact('fix','kelas','ta'));
         $pdf->getMpdf()->WriteHTML($rapor_nilai);
         $pdf->save(public_path("pdf/rangking-".str_replace(' ','-',$kelas)."-".str_replace('/','-',$ta).".pdf"), 'A4');
         return response()->json([

@@ -12,7 +12,7 @@ class NilaiIndividu extends Model
     ];
     public function siswa()
     {
-        return $this->hasOne('App\Models\Siswa','nis','induk');
+        return $this->hasOne('App\Models\siswa','nis','induk');
     }
     public function kelas()
     {

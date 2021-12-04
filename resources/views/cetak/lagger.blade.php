@@ -1,3 +1,4 @@
+<center><h3>Lagger Pelajaran {{ $pelajaran }} / {{ $kelas }}</h3></center>
 <table border="1">
     <tr>
         <td width="80" rowspan="3" height="81" align="center" bgcolor="#CCCCCC"><b>No</b></td>
