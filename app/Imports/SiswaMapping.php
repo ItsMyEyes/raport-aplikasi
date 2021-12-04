@@ -13,6 +13,11 @@ class SiswaMapping implements ToModel
     */
     public function model(array $row)
     {
+        $checking = \App\Models\siswa::where('nis',$row[1])->first();
+        if (!isset($checking) && is_null($checking)) {
+            return;
+            // throw new Exception("Error Processing Request", 1);
+        }
         return new \App\Models\MappingSiswaKelas([
             'id_siswa' => $row[1],
             'id_kelas' => request()->id_kelas,

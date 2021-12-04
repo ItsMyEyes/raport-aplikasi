@@ -80,7 +80,7 @@ class GuruController extends Controller
         ]);
 
         switch ($request->akses) {
-            case 'Tata Usaha':
+            case 'Admin':
                 $akses = 'tata_usaha';
                 break;
             case 'Wakil Kurikulum':
@@ -157,7 +157,7 @@ class GuruController extends Controller
         }
 
         switch ($request->akses) {
-            case 'Tata Usaha':
+            case 'Admin':
                 $akses = 'tata_usaha';
                 break;
             case 'Wakil Kurikulum':

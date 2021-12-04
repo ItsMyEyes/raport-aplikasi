@@ -17,9 +17,9 @@ class SiswaResources extends ResourceCollection
         return [
             'data' => $this->collection->transform(function($page){
                 return [
-                    'kode_login' => $page->siswa->nis,
-                    'email' => $page->siswa->email,
-                    'nama' => $page->siswa->nama,
+                    'kode_login' => isset($page->siswa) && !is_null($page->siswa) ? $page->siswa->nis : "0",
+                    'email' => isset($page->siswa) && !is_null($page->siswa) ? $page->siswa->email : "0",
+                    'nama' => isset($page->siswa) && !is_null($page->siswa) ? $page->siswa->nama : "0",
                     'nilai' => ($page->nilai->count() > 0) ? true : false
                 ];
             }),

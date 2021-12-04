@@ -40,7 +40,7 @@ class AuthController extends Controller
                 $akses2 = 'guru';
                 switch (auth()->user()->akses) {
                     case 'tata_usaha':
-                        $akses = 'Tata usaha';
+                        $akses = 'Admin';
                         $akses2 = 'tata_usaha';
                         break;
                     case 'wakil_kurikulum':

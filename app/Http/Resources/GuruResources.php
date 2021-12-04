@@ -19,7 +19,7 @@ class GuruResources extends ResourceCollection
                 $akses2 = 'guru';
                 switch ($page->akses) {
                     case 'tata_usaha':
-                        $akses = 'Tata usaha';
+                        $akses = 'Admin';
                         $akses2 = $page->akses;
                         break;
                     case 'wakil_kurikulum':
@@ -45,8 +45,8 @@ class GuruResources extends ResourceCollection
                     'nama' => $page->nama,
                     'kode_login' => $page->kode_login,
                     'email' => $page->email,
-                    'nip' => $page->guru->nip,
-                    'no_hp' => $page->guru->no_hp,
+                    'nip' => isset($page->guru) && !is_null($page->guru) ? $page->guru->nip  : '-',
+                    'no_hp' => isset($page->guru) && !is_null($page->guru) ? $page->guru->no_hp  : '-',
                     'akses' => $akses,
                     'akses2' => $akses2
                 ];

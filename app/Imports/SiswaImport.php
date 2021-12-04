@@ -21,7 +21,7 @@ class SiswaImport implements ToModel
             'semester' => '1',
             'absen' => '1'
         ]);
-        return new \App\Models\Siswa([
+        return new \App\Models\siswa([
             'nis' => $row[0],
             'password' => bcrypt($row[0]),
             'nisn' => $row[1],
@@ -48,15 +48,15 @@ class SiswaImport implements ToModel
             'diterima_kls' => '-',
             'diterima_tgl' => '-',
 
-            'nama_ayah' => $row[14],
-            'nama_ibu' => $row[15],
-            'alamat_ortu' => $row[16],
-            'kelurahan_ortu' => $row[17],
-            'kecamatan_ortu' => $row[18],
-            'kabupaten_ortu' => $row[19],
-            'kodepos_ortu' => $row[20],
-            'nohp_ortu' => $row[21],
-            'pekerjaan_ortu' => $row[22],
+            'nama_ayah' => '-',
+            'nama_ibu' => '-',
+            'alamat_ortu' => '-',
+            'kelurahan_ortu' => '-',
+            'kecamatan_ortu' => '-',
+            'kabupaten_ortu' => '-',
+            'kodepos_ortu' => '-',
+            'nohp_ortu' => '-',
+            'pekerjaan_ortu' => '-',
 
             'nama_wali' => '-',
             'alamat_wali' => '-',

@@ -15,10 +15,22 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = \App\Models\MappingKelas::with('guru')->with('kelas')->where('ta',request()->ta)->get();
+        $data = Array();
+        foreach ($kelas as $key => $value) {
+            $data[$key]['id'] = (int)$value->id;
+            $data[$key]['id_kelas'] = (int)$value->id_kelas;
+            $data[$key]['wali_kelas'] = $value->wali_kelas;
+            $data[$key]['guru']['nama'] = isset($value->guru) && !is_null($value->guru) ? $value->guru->nama : "Tidak ada wali kelas";
+            $data[$key]['kelas']['id'] = (int)$value->id_kelas;;
+            $data[$key]['kelas']['kelas'] = $value->kelas->kelas;
+            $data[$key]['kelas']['tingkat'] = $value->kelas->tingkat;
+            $data[$key]['kb_ket'] = (int)$value->kb_ket;
+            $data[$key]['kb_peng'] = (int)$value->kb_peng;
+        }
         return response()->json([
             'message'=>'Berhasil data kelas',
             'code' => 200,
-            'data' => $kelas
+            'data' => $data
         ]);
     }
 

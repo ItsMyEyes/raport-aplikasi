@@ -15,7 +15,7 @@ class NilaiImport implements ToModel
     {
         return new \App\Models\NilaiIndividu([
             'induk' => $row[0],
-            'matpel' => request()->id_matpel,
+            'matpel' => request()->id_matpel, 
             'ta' => request()->ta,
             'semester' => request()->semester,
             'p1' => $row[1],
