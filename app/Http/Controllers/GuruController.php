@@ -172,17 +172,22 @@ class GuruController extends Controller
             'kode_guru'=>$request->kode_guru,
             'nip'=>$request->nip,
             'nama'=>$request->nama,
-            'no_hp'=>$request->no_hp
+            'no_hp'=>$request->no_hp,
         ]);
         if (\App\Models\User::where('kode_login',$id)->first()->akses == 'wali_kelas') {
             if (\App\Models\MappingKelas::where('wali_kelas',$id)->where('ta',$request->ta)->get()->count() > 0) {
                 $akses = 'guru';
             }
         }
-        \App\Models\User::where('kode_login',$id)->update([
+        $data = \App\Models\User::where('kode_login',$id)->first();
+        $password = $data->password;
+        if (!is_null($request->password)) {
+            $password = bcrypt($request->password);
+        }
+        $data->update([
             'nama' => $request->nama,
             'kode_login' => $request->kode_guru,
-            'password' => bcrypt($request->kode_guru),
+            'password' => $password,
             'email' => $request->email,
             'akses' => $akses
         ]);

@@ -30,6 +30,11 @@
     <?php
         $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
         $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+        if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+        if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+        if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+        if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+        
         ?>
         @foreach($c as $g)
             @if($g->id_siswa == $b->induk)

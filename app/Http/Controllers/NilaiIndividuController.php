@@ -70,7 +70,44 @@ class NilaiIndividuController extends Controller
     public function upload(Request $request)
     {
         $file = $request->file('file');
-        Excel::import(new NilaiImport, $file);
+        $data = Excel::toArray(new NilaiImport, request()->file('file')); 
+
+        collect(head($data))
+            ->each(function ($row, $key) {
+                $checking = \App\Models\NilaiIndividu::where('induk',$row[0])
+                    ->where('matpel',request()->id_matpel)
+                    ->where('ta',request()->ta)
+                    ->where('semester',request()->semester)
+                    ->first();
+                if (isset($checking) && !is_null($checking)) {
+                    $checking->update([
+                        'induk' => $row[0],
+                        'matpel' => request()->id_matpel, 
+                        'ta' => request()->ta,
+                        'semester' => request()->semester,
+                        'p1' => $row[1],
+                        'p2' => $row[2],
+                        'p3' => $row[3],
+                        'k1' => $row[4],
+                        'k2' => $row[5],
+                        'k3' => $row[6],
+                    ]);
+                } else {
+                    \App\Models\NilaiIndividu::create([
+                        'induk' => $row[0],
+                        'matpel' => request()->id_matpel, 
+                        'ta' => request()->ta,
+                        'semester' => request()->semester,
+                        'p1' => $row[1],
+                        'p2' => $row[2],
+                        'p3' => $row[3],
+                        'k1' => $row[4],
+                        'k2' => $row[5],
+                        'k3' => $row[6],
+                    ]);
+                }
+                    
+            });
         return response()->json([
             'message' => 'Data Nilai Berhasil Diimport!',
             'code' => 201
