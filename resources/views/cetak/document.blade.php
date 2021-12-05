@@ -25,7 +25,7 @@
         <tr>
         <td width="20%" valign="top">Kelas/Semester</td>
         <td width="1%" valign="top">:</td>
-        <td width="30%" valign="top">{{$a->kelas->kelas->kelas->tingkat}} {{$a->kelas->kelas->kelas->kelas}} / {{$r}}</td>
+        <td width="30%" valign="top">{{$a->kelas->kelas->kelas->kelas}} / {{$r}}</td>
         <td width="16%" valign="top">Kompetensi Keahlian</td>
         <td width="2%" valign="top">:</td>
         <td width="29%" valign="top">Multimedia</td>
@@ -51,69 +51,38 @@
       </tr>
       <tr>
         <th align="center" style="width:60px;" class="text-center">Angka</th>
-        <th align="center" style="width:60px;" class="text-center">Predikat</th>
-        <th align="center" style="width:60px;" class="text-center">&nbsp;</th>
+        <th align="center" style="width:60px;" class="text-center" colspan="2">Predikat</th>
         <th align="center" style="width:60px;" class="text-center">Angka</th>
-        <th align="center" style="width:60px;" class="text-center">Predikat</th>
-        <th align="center" style="width:60px;" class="text-center">&nbsp;</th>
+        <th align="center" style="width:60px;" class="text-center" colspan="2">Predikat</th>
       </tr>
         </thead>
         <tbody>
             <tr>
                 <td colspan="8" class="strong">A. Muatan Nasional</td>
             </tr>
+            @php $i=1; @endphp
             @foreach($nilai as $b)
-            <?php
-              $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
-              $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
-              if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
-              if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
-              if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
-              if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
-
-              if($npengetahuan>80){$predikat_pengetahuan="A"; $nilpengetahuan=$npengetahuan; $desc_pengetahuan="Mainnya Heba";}
-                elseif($npengetahuan>70) {$predikat_pengetahuan="B"; $nilpengetahuan=$npengetahuan; $desc_pengetahuan="kurang Lineup";}
-                elseif($npengetahuan>60){$predikat_pengetahuan="C"; $nilpengetahuan=$npengetahuan; $desc_pengetahuan="sangat hebat";}
-                else {$predikat_pengetahuan="D"; $nilpengetahuan=$npengetahuan; $desc_pengetahuan="Kurang mampu";};
-				
-                // penyesuaian KB Pengetahuan
-                        if($npengetahuan>=$b->matpels->kb_peng){$des_kbp="dan <u>tuntas</u>";}
-                          else {$des_kbp="dan <u>belum tuntas</u>";};
-                          
-                        if($nketrampilan>80){$predikat_ketrampilan="A"; $nilketrampilan=$nketrampilan; $desc_ketrampilan="Mainnya Heba";}
-                          elseif($nketrampilan>70) {$predikat_ketrampilan="B"; $nilketrampilan=$nketrampilan; $desc_ketrampilan="Mainnya Heba";}
-                          elseif($nketrampilan>60){$predikat_ketrampilan="C"; $nilketrampilan=$nketrampilan;$desc_ketrampilan="Mainnya Heba";}
-                          else {$predikat_ketrampilan="D"; $nilketrampilan=$nketrampilan; $desc_ketrampilan="secara umum siswa masih kurang terampil dalam hal pengerjaan proyek, kinerja dan portofolio,";};
-
-                // penyesuaian KB Ketrampilan
-                        if($nketrampilan>=$b->matpels->kb_ket){$des_kbk="Siswa <u>tuntas</u> dan";}
-                          else {$des_kbk="Siswa <u>belum tuntas</u> dan";};
-                  
-                        if(min($b->k1,$b->k2,$b->k3)==$b->k1)
-                          {$desc2="ini";}
-                          else if(min($b->k1,$b->k2,$b->k3)==$b->k2)
-                          {$desc2="itu";}
-                              else {$desc2="atau ini";}
-                              $nilaiA = 0;
-                              $nilaiB = 0;
-                              $nilaiC1 = 0;
-                              $nilaiC2= 0;
-                              $nilaiC3= 0;
-                              $nilaiM= 0;
-
-                              $nilaiA2 = 0;
-                              $nilaiB2 = 0;
-                              $nilaiC12 = 0;
-                              $nilaiC22= 0;
-                              $nilaiC32= 0;
-                              $nilaiM2= 0;
-
-                              $nilaiA += $npengetahuan;                              
-                              $nilaiA2 += $nketrampilan;
-            ?>
                 @if($b->matpels->matpel->kelompok == 'a')
+                <?php
+                  $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
+                  $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+                  if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+                  if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+                  if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+                  if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+
+                  if($npengetahuan>80){$predikat_pengetahuan="A";}
+                    elseif($npengetahuan>70) {$predikat_pengetahuan="B";}
+                    elseif($npengetahuan>60){$predikat_pengetahuan="C";}
+                    else {$predikat_pengetahuan="D";}
+                              
+                            if($nketrampilan>80){$predikat_ketrampilan="A"; }
+                              elseif($nketrampilan>70) {$predikat_ketrampilan="B"; }
+                              elseif($nketrampilan>60){$predikat_ketrampilan="C"; }
+                              else {$predikat_ketrampilan="D";}
+                ?>
                     <tr>
-                    <td align="center">1</td>
+                    <td align="center">{{$i}}</td>
                     <td>{{$b->matpels->matpel->nama}}</td>
                     <td align="center">{{$npengetahuan}}</td>
                     <td align="center" colspan="2">{{$predikat_pengetahuan}}</td>
@@ -125,10 +94,30 @@
             <tr>
                 <td colspan="8" class="strong">B. Muatan Kewilayahan</td>
             </tr>
+            
+            @php $i=1; @endphp
             @foreach($nilai as $b)
                 @if($b->matpels->matpel->kelompok == 'b')
+                <?php
+                  $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
+                  $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+                  if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+                  if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+                  if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+                  if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+
+                  if($npengetahuan>80){$predikat_pengetahuan="A";}
+                    elseif($npengetahuan>70) {$predikat_pengetahuan="B";}
+                    elseif($npengetahuan>60){$predikat_pengetahuan="C";}
+                    else {$predikat_pengetahuan="D";}
+                              
+                            if($nketrampilan>80){$predikat_ketrampilan="A"; }
+                              elseif($nketrampilan>70) {$predikat_ketrampilan="B"; }
+                              elseif($nketrampilan>60){$predikat_ketrampilan="C"; }
+                              else {$predikat_ketrampilan="D";}
+                ?>
                     <tr>
-                    <td>1</td>
+                    <td>{{$i}}</td>
                     <td>{{$b->matpels->matpel->nama}}</td>
                     <td align="center">{{$npengetahuan}}</td>
                     <td align="center" colspan="2">{{$predikat_pengetahuan}}</td>
@@ -140,10 +129,30 @@
             <tr>
                 <td colspan="8" class="strong">C1. Dasar Bidang Keahlian</td>
             </tr>
+            
+            @php $i=1; @endphp
             @foreach($nilai as $b)
                 @if($b->matpels->matpel->kelompok == 'c1')
+                <?php
+                  $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
+                  $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+                  if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+                  if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+                  if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+                  if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+
+                  if($npengetahuan>80){$predikat_pengetahuan="A";}
+                    elseif($npengetahuan>70) {$predikat_pengetahuan="B";}
+                    elseif($npengetahuan>60){$predikat_pengetahuan="C";}
+                    else {$predikat_pengetahuan="D";}
+                              
+                            if($nketrampilan>80){$predikat_ketrampilan="A"; }
+                              elseif($nketrampilan>70) {$predikat_ketrampilan="B"; }
+                              elseif($nketrampilan>60){$predikat_ketrampilan="C"; }
+                              else {$predikat_ketrampilan="D";}
+                ?>
                     <tr>
-                    <td>1</td>
+                    <td>{{$i}}</td>
                     <td>{{$b->matpels->matpel->nama}}</td>
                     <td align="center">{{$npengetahuan}}</td>
                     <td align="center" colspan="2">{{$predikat_pengetahuan}}</td>
@@ -155,10 +164,29 @@
             <tr>
                 <td colspan="8" class="strong">C2. Dasar Program Keahlian</td>
             </tr>
+            @php $i=1; @endphp
             @foreach($nilai as $b)
                 @if($b->matpels->matpel->kelompok == 'c2')
+                <?php
+                  $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
+                  $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+                  if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+                  if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+                  if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+                  if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+
+                  if($npengetahuan>80){$predikat_pengetahuan="A";}
+                    elseif($npengetahuan>70) {$predikat_pengetahuan="B";}
+                    elseif($npengetahuan>60){$predikat_pengetahuan="C";}
+                    else {$predikat_pengetahuan="D";}
+                              
+                            if($nketrampilan>80){$predikat_ketrampilan="A"; }
+                              elseif($nketrampilan>70) {$predikat_ketrampilan="B"; }
+                              elseif($nketrampilan>60){$predikat_ketrampilan="C"; }
+                              else {$predikat_ketrampilan="D";}
+                ?>
                     <tr>
-                    <td>1</td>
+                    <td>{{$i}}</td>
                     <td>{{$b->matpels->matpel->nama}}</td>
                     <td align="center">{{$npengetahuan}}</td>
                     <td align="center" colspan="2">{{$predikat_pengetahuan}}</td>
@@ -170,10 +198,30 @@
             <tr>
                 <td colspan="8" class="strong">C3. Kompetensi Keahlian</td>
             </tr>
+            
+            @php $i=1; @endphp
             @foreach($nilai as $b)
                 @if($b->matpels->matpel->kelompok == 'c3')
+                <?php
+                  $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
+                  $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+                  if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+                  if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+                  if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+                  if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+
+                  if($npengetahuan>80){$predikat_pengetahuan="A";}
+                    elseif($npengetahuan>70) {$predikat_pengetahuan="B";}
+                    elseif($npengetahuan>60){$predikat_pengetahuan="C";}
+                    else {$predikat_pengetahuan="D";}
+                              
+                            if($nketrampilan>80){$predikat_ketrampilan="A"; }
+                              elseif($nketrampilan>70) {$predikat_ketrampilan="B"; }
+                              elseif($nketrampilan>60){$predikat_ketrampilan="C"; }
+                              else {$predikat_ketrampilan="D";}
+                ?>
                     <tr>
-                    <td>1</td>
+                    <td>{{$i}}</td>
                     <td>{{$b->matpels->matpel->nama}}</td>
                     <td align="center">{{$npengetahuan}}</td>
                     <td align="center" colspan="2">{{$predikat_pengetahuan}}</td>
@@ -185,10 +233,30 @@
             <tr>
                 <td colspan="8" class="strong">D. Muatan Lokal</td>
             </tr>
+            
+            @php $i=1; @endphp
             @foreach($nilai as $b)
                 @if($b->matpels->matpel->kelompok == 'c1')
+                <?php
+                  $nketrampilan     = round((($b->k1)+($b->k2)+($b->k3))/3);
+                  $npengetahuan     = round((($b->p1)+($b->p2)+($b->p3))/3);
+                  if ($b->k1 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/1);
+                  if ($b->p1 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/1);
+                  if ($b->k2 == 0) $nketrampilan = round((($b->k1)+($b->k2)+($b->k3))/2);
+                  if ($b->p2 == 0) $npengetahuan = round((($b->p1)+($b->p2)+($b->p3))/2);
+
+                  if($npengetahuan>80){$predikat_pengetahuan="A";}
+                    elseif($npengetahuan>70) {$predikat_pengetahuan="B";}
+                    elseif($npengetahuan>60){$predikat_pengetahuan="C";}
+                    else {$predikat_pengetahuan="D";}
+                              
+                            if($nketrampilan>80){$predikat_ketrampilan="A"; }
+                              elseif($nketrampilan>70) {$predikat_ketrampilan="B"; }
+                              elseif($nketrampilan>60){$predikat_ketrampilan="C"; }
+                              else {$predikat_ketrampilan="D";}
+                ?>
                     <tr>
-                    <td>1</td>
+                    <td>{{$i}}</td>
                     <td>{{$b->matpels->matpel->nama}}</td>
                     <td align="center">{{$npengetahuan}}</td>
                     <td align="center" colspan="2">{{$predikat_pengetahuan}}</td>
@@ -274,7 +342,7 @@
         <p>{{$a->nama_ayah}}</p></td>
         <td width="31%" valign="top">
         Jakarta,  {{date('d F Y',strtotime("now"))}}<br>
-        Wali Kelas,<p>&nbsp;</p> 
+        Wali Kelas<p>&nbsp;</p> 
         <br><br><br><br><br><br><br>
         <p><u>{{ $wali_kelas }}</u><br>
         NIP. -
@@ -283,10 +351,10 @@
       <tr>
         <td width="100%" colspan="2"><center>
         Mengetahui,<br>
-        Kepala 123
+        Kepala Sekolah
         <br><br><br><br><br><br><br>
-        <u>Kepala</u><br>
-        NIP. 123
+        <u>Sisca Tri Damarianingrum, S.Pd.M.M</u><br>
+        NIP. -
         </center></td>
       </tr>
     </tbody></table>
