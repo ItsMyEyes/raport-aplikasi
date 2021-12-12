@@ -208,7 +208,7 @@ class NilaiIndividuController extends Controller
             $rata = 0;
             
             foreach ($nilai as $key => $value) {
-                $semua = $value->p1 + $value->p2 + $value->p3 + $value->k1 + $value->k2 + $value->k3;
+                $semua += $value->p1 + $value->p2 + $value->p3 + $value->k1 + $value->k2 + $value->k3;
                 $rata = $semua / 6;
             }
 

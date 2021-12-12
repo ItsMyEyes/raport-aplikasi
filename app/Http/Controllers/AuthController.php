@@ -66,8 +66,8 @@ class AuthController extends Controller
                     'nama' => auth()->user()->nama,
                     'kode_login' => auth()->user()->kode_login,
                     'email' => auth()->user()->email,
-                    'nip' => auth()->user()->guru->nip,
-                    'no_hp' => auth()->user()->guru->no_hp,
+                    'nip' => isset(auth()->user()->guru) && !is_null(auth()->user()->guru) ? auth()->user()->guru->nip : '-',
+                    'no_hp' => isset(auth()->user()->guru) && !is_null(auth()->user()->guru) ? auth()->user()->guru->no_hp : '-',
                     'akses' => $akses,
                     'akses2' => $akses2
                 ];
