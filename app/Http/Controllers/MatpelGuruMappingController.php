@@ -15,15 +15,10 @@ class MatpelGuruMappingController extends Controller
     public function index()
     {
         $result = matpel_guru_mapping::where('ta',request()->ta)->with(['guru','matpel'])->get();
-        $data = Array();
-        foreach ($result as $key => $value) {
-            $data[$key] = $value;
-            $data[$key]['guru']['nama'] = (!is_null($value['guru'])) ? $value['guru']['nama'] : "Tidak ada Guru";
-        }
         return response()->json([
             'message'=>'berhasil mengubah data master pelajaran',
             'code' => 200,
-            'data' => $data
+            'data' => $result
         ],200);
     }
 
