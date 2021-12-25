@@ -21,6 +21,7 @@ class NilaiIndividuController extends Controller
         $dataNilai = \App\Models\NilaiIndividu::where('induk',$request->id_siswa)->where('matpel',$request->id_matpel)->where('ta',$request->ta)->where('semester',$request->semester)->first();
         if ($dataNilai) {
             $dataNilai->ta = request()->ta;
+            $data->type = request()->type;
             $dataNilai->semester = $request->semester;
             $dataNilai->p1 = $request->p1;
             $dataNilai->p2 = $request->p2;
@@ -32,6 +33,7 @@ class NilaiIndividuController extends Controller
             $dataNilai->save();
         }else{
             $a = new \App\Models\NilaiIndividu;
+            $a->type = request()->type;
             $a->induk = $request->id_siswa;
             $a->matpel = $request->id_matpel;
             $a->ta = request()->ta;
@@ -53,7 +55,7 @@ class NilaiIndividuController extends Controller
 
     public function show($id,$dua)
     {
-        $a = \App\Models\NilaiIndividu::where('induk',$id)->where('matpel',$dua)->where('semester',request()->semester)->where('ta',request()->ta)->first();
+        $a = \App\Models\NilaiIndividu::where('induk',$id)->where('matpel',$dua)->where('semester',request()->semester)->where('type', request()->type)->where('ta',request()->ta)->first();
         return response()->json([
             'message' => 'Anda Berhasil Mendapatkan Nilai',
             'code' => 200,
@@ -76,6 +78,7 @@ class NilaiIndividuController extends Controller
             ->each(function ($row, $key) {
                 $checking = \App\Models\NilaiIndividu::where('induk',$row[0])
                     ->where('matpel',request()->id_matpel)
+                    ->where('type', request()->type)
                     ->where('ta',request()->ta)
                     ->where('semester',request()->semester)
                     ->first();
@@ -83,6 +86,7 @@ class NilaiIndividuController extends Controller
                     $checking->update([
                         'induk' => $row[0],
                         'matpel' => request()->id_matpel, 
+                        'type' => request()->type, 
                         'ta' => request()->ta,
                         'semester' => request()->semester,
                         'p1' => $row[1],
@@ -98,6 +102,7 @@ class NilaiIndividuController extends Controller
                         'matpel' => request()->id_matpel, 
                         'ta' => request()->ta,
                         'semester' => request()->semester,
+                        'type' => request()->type, 
                         'p1' => $row[1],
                         'p2' => $row[2],
                         'p3' => $row[3],
@@ -121,7 +126,7 @@ class NilaiIndividuController extends Controller
             $query->where('ta',request()->ta);
             $query->where('semester',request()->semester);
         })->with('nilai')->first();
-        $nilai = \App\Models\NilaiIndividu::where('induk',request()->nis)->where('ta',request()->ta)->where('semester',request()->semester)->get();
+        $nilai = \App\Models\NilaiIndividu::where('induk',request()->nis)->where('ta',request()->ta)->where('semester',request()->semester)->where('type', request()->type)->get();
         $cas = \App\Models\cas::where('induk',request()->nis)->where('ta',request()->ta)->where('semester',request()->semester)->first();
         $prakerin = \App\Models\prakerin::where('induk',request()->nis)->where('ta',request()->ta)->where('semester',request()->semester)->get();
         $tahun_pelajaran = request()->ta;
@@ -137,6 +142,7 @@ class NilaiIndividuController extends Controller
         $data['cas'] = $cas;
         $data['prakerin'] = $prakerin;
         $data['semester'] = request()->semester;
+        $data['tengah_semester'] = request()->type == "tengah" ? true : false;
         $data['ta'] = request()->ta;
         $data['nama'] = $a->nama;
         $data['nis'] = $a->nisn;
@@ -163,7 +169,7 @@ class NilaiIndividuController extends Controller
     
     public function lagger()
     {
-        $a = \App\Models\NilaiIndividu::where('matpel',request()->matpel)->where('semester',request()->semester)->where('ta',request()->ta)->get();
+        $a = \App\Models\NilaiIndividu::where('matpel',request()->matpel)->where('semester',request()->semester)->where('type', request()->type)->where('ta',request()->ta)->get();
         $c = \App\Models\MappingSiswaKelas::where('id_kelas',request()->id_kelas)->where('ta',request()->ta)->get();
         if (empty($a)) {
             return response()->json([
@@ -203,7 +209,7 @@ class NilaiIndividuController extends Controller
         $ta = request()->ta;
         $data = Array();
         foreach ($c as $key => $page) {
-            $nilai = \App\Models\NilaiIndividu::where('induk',$page->id_siswa)->where('ta',request()->ta)->where('semester',request()->semester)->get();
+            $nilai = \App\Models\NilaiIndividu::where('induk',$page->id_siswa)->where('ta',request()->ta)->where('type', request()->type)->where('semester',request()->semester)->get();
             $semua = 0;
             $rata = 0;
             

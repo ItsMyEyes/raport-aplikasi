@@ -16,6 +16,7 @@ class CreateNilaisTable extends Migration
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
 		    $table->string('induk', 50);
+            $table->string('type')->default('semester');
 		    $table->integer('matpel');
 		    $table->integer('ta');
 		    $table->integer('semester');

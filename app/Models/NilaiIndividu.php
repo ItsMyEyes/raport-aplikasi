@@ -8,7 +8,7 @@ class NilaiIndividu extends Model
 {
     protected $table = 'nilais';
     protected $fillable = [
-        'induk','matpel','ta','semester','p1','p2','p3','k1','k2','k3','s1','s2','s3','s4','catatan'
+        'induk','matpel','ta','semester','p1','p2','p3','k1','k2','k3','s1','s2','s3','s4','catatan','type'
     ];
     public function siswa()
     {

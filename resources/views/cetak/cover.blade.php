@@ -11,7 +11,7 @@
 <br>
 <br>
 <br>
-<h3>RAPOR UJIAN SEMESTER {{$semester}}</h3>
+<h3>RAPOR UJIAN {{  ($tengah_semester) ? "Tengah " : "" }}SEMESTER {{$semester}}</h3>
 <h3>SMK Sahid</h3>
 <h3>TAHUN PELAJARAN {{$ta}}</h3><br>
 <br>
