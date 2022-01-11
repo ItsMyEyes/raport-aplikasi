@@ -17,9 +17,9 @@ class AuthController extends Controller
     {
         $credentials = (request()->type != 'siswa') ? request(['kode_login', 'password']) : ['nis'=>request()->kode_login, 'password'=>request()->password];
 
-        if (request()->type == 'siswa' && $toke = \Auth::guard('siswa')->attempt($credentials)) {
+        if (request()->type == 'siswa' && $toke = Auth::guard('siswa')->attempt($credentials)) {
             return $this->respondWithToken($toke);
-        } elseif ($token = auth()->attempt($credentials)) {
+        } elseif ($token = auth('api')->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
         return response()->json(['error' => 'Kode login dan password salah'], 401);
@@ -36,9 +36,9 @@ class AuthController extends Controller
             $user = auth('siswa')->user();
         } else {
             $user = null;
-            if (auth()->user()) {
+            if (auth('api')->user()) {
                 $akses2 = 'guru';
-                switch (auth()->user()->akses) {
+                switch (auth('api')->user()->akses) {
                     case 'tata_usaha':
                         $akses = 'Admin';
                         $akses2 = 'tata_usaha';
@@ -52,8 +52,8 @@ class AuthController extends Controller
                         break;
                 }
 
-                if (auth()->user()->akses == 'guru' || auth()->user()->akses == 'wali_kelas') {
-                    $wali = \App\Models\MappingKelas::where('wali_kelas',auth()->user()->kode_login)->where('ta',request()->ta)->first();
+                if (auth('api')->user()->akses == 'guru' || auth('api')->user()->akses == 'wali_kelas') {
+                    $wali = \App\Models\MappingKelas::where('wali_kelas',auth('api')->user()->kode_login)->where('ta',request()->ta)->first();
                     if ($wali) {
                         $akses = 'Wali Kelas '.$wali->kelas->kelas;
                         $akses2 = 'wali_kelas';
@@ -63,11 +63,11 @@ class AuthController extends Controller
                     }
                 }
                 $user = [
-                    'nama' => auth()->user()->nama,
-                    'kode_login' => auth()->user()->kode_login,
-                    'email' => auth()->user()->email,
-                    'nip' => isset(auth()->user()->guru) && !is_null(auth()->user()->guru) ? auth()->user()->guru->nip : '-',
-                    'no_hp' => isset(auth()->user()->guru) && !is_null(auth()->user()->guru) ? auth()->user()->guru->no_hp : '-',
+                    'nama' => auth('api')->user()->nama,
+                    'kode_login' => auth('api')->user()->kode_login,
+                    'email' => auth('api')->user()->email,
+                    'nip' => isset(auth('api')->user()->guru) && !is_null(auth('api')->user()->guru) ? auth('api')->user()->guru->nip : '-',
+                    'no_hp' => isset(auth('api')->user()->guru) && !is_null(auth('api')->user()->guru) ? auth('api')->user()->guru->no_hp : '-',
                     'akses' => $akses,
                     'akses2' => $akses2
                 ];
@@ -88,7 +88,7 @@ class AuthController extends Controller
         if (request()->type == 'siswa') {
             auth('siswa')->logout();
         } else {
-            auth()->logout();
+            auth('api')->logout();
         }
 
         return response()->json(['message' => 'Successfully logged out']);
@@ -101,7 +101,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth('api')->refresh());
     }
 
     /**
@@ -116,7 +116,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 }
