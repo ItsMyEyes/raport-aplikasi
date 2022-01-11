@@ -51,7 +51,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/" class="nav-link">Home</a>
+        <a href="/admin/dashboard" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -105,7 +105,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
+    <a href="/admin/dashboard" class="brand-link">
       <img src="{{ $logo }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">RKKM</span>
     </a>
@@ -243,7 +243,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="/">RKKM</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="/admin/dashboard">RKKM</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.1.0
