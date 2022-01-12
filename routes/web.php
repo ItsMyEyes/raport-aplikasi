@@ -38,7 +38,7 @@ Route::prefix('/admin')->group(function() {
         Route::get('/matpel/{id}/delete', [WebMatpelController::class, 'destroy'])->name('matpel.delete');
 
         Route::resource('nilai', WebNilaiController::class);
-        Route::get('/nilai/upload', [WebNilaiController::class, 'upload'])->name('nilai.import');
+        Route::post('/nilai/upload', [WebNilaiController::class, 'upload'])->name('nilai.import');
 
         Route::resource('cas', WebCasController::class);
 
