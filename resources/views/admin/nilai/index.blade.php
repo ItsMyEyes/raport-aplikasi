@@ -66,7 +66,7 @@
                             </td>
                             <td>
                               <div class="form-group">
-                                  <select requried name="type" id="" class="form-control">
+                                  <select required name="type" id="" class="form-control">
                                       <option value="">~~ Option ~~</option>
                                       <option value="tengah">Setengah Semester</option>
                                       <option value="semester">Semester</option>
@@ -75,7 +75,7 @@
                             </td>
                             <td>
                               <div class="form-group">
-                                  <input type="number" class="form-control" requried name="semester">
+                                  <input type="number" class="form-control" required name="semester">
                               </div>
                             </td>
                             <td>
@@ -114,10 +114,31 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('siswa.mapping') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('nilai.import') }}" method="post" enctype="multipart/form-data">
           @csrf
+          <div class="form-group">
+            <label for="">Pelajaran</label>
+            <select name="id_matpel" id="" class="form-control">
+              <option value="">~~ Option Matpel ~~</option>
+              @foreach ($matpel as $m)
+                  <option value="{{$m->id_matpel}}">{{ $m->matpel->nama }} ( {{ $m->guru->nama }} )</option>
+              @endforeach
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="">Semester</label>
+            <input type="number" class="form-control" required name="semester">
+          </div>
+          <div class="form-group">
+            <label for="">Type</label>
+              <select required name="type" id="" class="form-control">
+                  <option value="">~~ Option ~~</option>
+                  <option value="tengah">Setengah Semester</option>
+                  <option value="semester">Semester</option>
+              </select>
+          </div>
         <div class="form-group">
-          <label for="">File Upload Mapping</label>
+          <label for="">File Upload</label>
           <input type="file" name="file" id="" class="form-control">
         </div>
       </div>

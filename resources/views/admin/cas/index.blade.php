@@ -26,9 +26,6 @@
       <div class="card">
         <div class="card-header d-flex p-0">
             <h3 class="card-title p-3">Data Nilai</h3>
-            <ul class="nav nav-pills ml-auto p-2">
-              <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-file"></i> Import siswa</a></li>
-            </ul>
           </div>
         <!-- /.card-header -->
         <div class="card-body">
