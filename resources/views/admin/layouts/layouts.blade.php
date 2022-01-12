@@ -139,17 +139,17 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @if (auth()->user()->akses == 'tata_usaha' || auth()->user()->akses == "wakil_kurikulum")
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ Request::segment('2') == 'dashboard' ? ' active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if (auth()->user()->akses == 'tata_usaha' || auth()->user()->akses == "wakil_kurikulum")
           <li class="nav-item">
-            <a href="{{ route('user.index') }}" class="nav-link">
+            <a href="{{ route('user.index') }}" class="nav-link {{ Request::segment('2') == 'user' ? ' active' : '' }}">
               <i class="nav-icon fa fa-users"></i>
               <p>
                 Users / Guru
@@ -157,24 +157,24 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('kelas.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+            <a href="{{ route('kelas.index') }}" class="nav-link {{ Request::segment('2') == 'kelas' ? ' active' : '' }}">
+              <i class="nav-icon fa fa-building"></i>
               <p>
                 Kelas
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('siswa.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+            <a href="{{ route('siswa.index') }}" class="nav-link {{ Request::segment('2') == 'siswa' ? ' active' : '' }}">
+              <i class="nav-icon fa fa-user"></i>
               <p>
                 Siswa
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('matpel.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+            <a href="{{ route('matpel.index') }}" class="nav-link {{ Request::segment('2') == 'matpel' ? ' active' : '' }}">
+              <i class="nav-icon fa fa-book"></i>
               <p>
                 Mata pelajaran
               </p>
@@ -182,24 +182,24 @@
           </li>
           @else
           <li class="nav-item">
-            <a href="{{ route('nilai.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+            <a href="{{ route('nilai.index') }}" class="nav-link {{ Request::segment('2') == 'nilai' ? ' active' : '' }}">
+              <i class="nav-icon fa fa-edit"></i>
               <p>
                 Input Nilai
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('cas.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+            <a href="{{ route('cas.index') }}" class="nav-link {{ Request::segment('2') == 'cas' ? ' active' : '' }}">
+              <i class="nav-icon fa fa-sticky-note"></i>
               <p>
                 Input Cas
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('cetak') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+            <a href="{{ route('cetak') }}" class="nav-link {{ Request::segment('2') == 'cetak' ? ' active' : '' }}">
+              <i class="nav-icon fa fa-file"></i>
               <p>
                 Cetak
               </p>

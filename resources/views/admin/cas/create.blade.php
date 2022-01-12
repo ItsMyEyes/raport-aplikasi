@@ -34,11 +34,11 @@
                 </div>
                 <div class="form-group">
                     <label for="">Catatan</label>
-                    <input type="text" required name="catatan" value="{{ !is_null($b) ? $b->catatan : '' }}" maxlength="2" class="form-control">
+                    <input type="text" required name="catatan" value="{{ !is_null($b) ? $b->catatan : '' }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Sikap</label>
-                    <input type="text" required name="sikap" value="{{ !is_null($b) ? $b->sikap : '' }}" maxlength="2" class="form-control">
+                    <input type="text" required name="sikap" value="{{ !is_null($b) ? $b->sikap : '' }}" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
