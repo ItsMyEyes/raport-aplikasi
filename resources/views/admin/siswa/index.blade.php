@@ -91,7 +91,7 @@
         <form action="{{ route('siswa.mapping') }}" method="post" enctype="multipart/form-data">
           @csrf
         <div class="form-group">
-          <input type="hidden" name="kelas" value="{{ $kelas }}">
+          <input type="hidden" name="id_kelas" value="{{ $kelas }}">
           <label for="">Nis</label>
           <input type="text" class="form-control" name="nis">
         </div>
