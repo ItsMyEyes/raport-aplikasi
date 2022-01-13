@@ -209,7 +209,7 @@ class WebSiswaController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             Excel::import(new \App\Imports\SiswaImport,$file);
-            return back();
+            return redirect()->route('siswa.index');
         }
         return back()->withErrors(['msg' => 'Gagal mengupload dikarenakan tidak ada file']);
     }

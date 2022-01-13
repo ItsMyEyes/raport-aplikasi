@@ -10,7 +10,7 @@
                 <h3 class="card-title">Import Users</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('siswa.import') }}?id_kelas={{$kelas}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('siswa.import') }}?id_kelas={{$kelas}}&ta={{ Session::get('ta')['ta'] }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="">File</label>
