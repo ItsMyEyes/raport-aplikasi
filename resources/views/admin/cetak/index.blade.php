@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <select name="matpel" id="" class="form-control">
                                 <option value="">~~ Matpel ~~</option>
-                                @foreach ($matpel as $item)
+                                @foreach ($matpel as $m)
                                     <option value="{{$m->id_matpel}}">{{ isset($m->matpel) && !is_null($m->matpel) ? $m->matpel->nama : "Tidak ada nama matpel"  }} ( {{  isset($m->guru) && !is_null($m->guru) ? $m->guru->nama : "Tidak ada nama guru" }} )</option>
                                 @endforeach
                             </select>
