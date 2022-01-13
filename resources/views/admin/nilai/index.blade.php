@@ -60,7 +60,7 @@
                                 <select name="matpel" id="" class="form-control">
                                     <option value="">~~ Option Matpel ~~</option>
                                     @foreach ($matpel as $m)
-                                        <option value="{{$m->id_matpel}}">{{ $m->matpel->nama }} ( {{ $m->guru->nama }} )</option>
+                                      <option value="{{$m->id_matpel}}">{{ isset($m->matpel) && !is_null($m->matpel) ? $m->matpel->nama : "Tidak ada nama matpel"  }} ( {{ $m->guru->nama }} )</option>
                                     @endforeach
                                 </select>
                             </td>
