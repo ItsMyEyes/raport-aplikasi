@@ -182,7 +182,7 @@ class WebNilaiController extends Controller
     public function lagger()
     {
         $a = \App\Models\NilaiIndividu::where('matpel',request()->matpel)->where('semester',request()->semester)->where('type', request()->type)->where('ta',Session::get('ta')['ta'])->get();
-        $c = \App\Models\MappingSiswaKelas::where('id_kelas',request()->id_kelas)->where('ta',Session::get('ta')['ta'])->get();
+        $c = \App\Models\MappingSiswaKelas::where('id_kelas',request()->kelas)->where('ta',Session::get('ta')['ta'])->get();
         if (empty($a)) {
             return response()->json([
                 'message' => 'Matpel tidak ditemukan pada semester ini',

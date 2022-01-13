@@ -57,6 +57,16 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 col-xl-3">
                         <div class="form-group">
+                            <select name="kelas" id="" class="form-control">
+                                <option value="">~~ Kelas ~~</option>
+                                @foreach ($list_kelas as $kelas)
+                                    <option value="{{ $kelas->id_kelas }}">{{ $kelas->kelas->kelas }} ( {{ !is_null($kelas->guru) ? $kelas->guru->nama : "Tidak Ada Wali Kelas" }} )</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-xl-2">
+                        <div class="form-group">
                             <select name="matpel" id="" class="form-control">
                                 <option value="">~~ Matpel ~~</option>
                                 @foreach ($matpel as $m)
@@ -65,7 +75,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-4 col-xl-4">
+                    <div class="col-xs-12 col-md-4 col-xl-2">
                         <div class="form-group">
                             <select name="type" id="" class="form-control">
                                 <option value="">~~ Option ~~</option>
